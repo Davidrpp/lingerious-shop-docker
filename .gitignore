@@ -1,0 +1,11 @@
+secrets/
+*.env
+*.sql
+*.sql.gz
+*.tar
+*.tar.gz
+*.zip
+*.7z
+*.partial-incomplete
+wordpress/
+db/

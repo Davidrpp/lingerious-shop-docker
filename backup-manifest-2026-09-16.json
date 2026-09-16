@@ -1,0 +1,38 @@
+{
+  "valid_restore_set": [
+    "wordpress-core-files.tar.gz",
+    "wordpress-database.sql.gz"
+  ],
+  "incomplete_files": [
+    {
+      "name": "wordpress-files.tar.gz.partial-incomplete",
+      "bytes": 1675493376,
+      "reason": "First full-file streaming attempt was interrupted and was not verified or restored."
+    }
+  ],
+  "source": "Hostinger over authenticated SSH and WordPress database credentials read on host without exposing secrets",
+  "excluded_from_core_files": [
+    "wp-content/updraft",
+    "wp-content/cache"
+  ],
+  "files": [
+    {
+      "name": "wordpress-core-files.tar.gz",
+      "bytes": 553804969,
+      "sha256": "09efc205afa69849cb2e46806e66238cb487766580cce232eb7fc45d7fec0038"
+    },
+    {
+      "name": "wordpress-database.sql.gz",
+      "bytes": 3246768,
+      "sha256": "7f3b77e355ef4be64ced26f4ee4ee3ecc9738663d6a39089cca10cc13a69edcf"
+    }
+  ],
+  "backup_type": "current private runtime backup restored into local Docker preview",
+  "created_at": "2026-09-16T16:11:37",
+  "notes": [
+    "Core archive contains live WordPress runtime files and wp-content needed to restore the site; nested Updraft historical backup directory and cache were intentionally excluded.",
+    "Database dump was restored into the Docker preview and WooCommerce HPOS order table counts were verified.",
+    "The original wp-config.php is inside the private backup archive and must be treated as secret material."
+  ],
+  "site": "lingerious.shop"
+}

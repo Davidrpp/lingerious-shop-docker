@@ -1,0 +1,59 @@
+name: lingerious-preview
+services:
+  db:
+    image: mariadb:11.8
+    restart: unless-stopped
+    environment:
+      MARIADB_DATABASE: lingerious
+      MARIADB_USER: lingerious
+      MARIADB_PASSWORD_FILE: /run/secrets/db_password
+      MARIADB_ROOT_PASSWORD_FILE: /run/secrets/db_root_password
+    volumes:
+      - db:/var/lib/mysql
+      - ./secrets:/run/secrets:ro
+    networks: [database]
+    healthcheck:
+      test: [CMD, healthcheck.sh, --connect, --innodb_initialized]
+      interval: 10s
+      timeout: 5s
+      retries: 12
+  web:
+    image: wordpress:6.8.2-php8.2-apache
+    restart: unless-stopped
+    environment:
+      WORDPRESS_DB_HOST: db:3306
+      WORDPRESS_DB_USER: lingerious
+      WORDPRESS_DB_NAME: lingerious
+      WORDPRESS_DB_PASSWORD_FILE: /run/secrets/db_password
+      WORDPRESS_CONFIG_EXTRA: |
+        define('WP_HOME', 'https://lingerious.shop');
+        define('WP_SITEURL', 'https://lingerious.shop');
+        define('DISABLE_WP_CRON', true);
+        define('WP_ENVIRONMENT_TYPE', 'staging');
+        define('DISALLOW_FILE_EDIT', true);
+    ports: ['127.0.0.1:8098:80']
+    volumes:
+      - wordpress:/var/www/html
+      - ./secrets:/run/secrets:ro
+      - ./apache-preview.conf:/etc/apache2/conf-enabled/preview.conf:ro
+    networks: [front, database]
+    depends_on:
+      db: {condition: service_healthy}
+    healthcheck:
+      test: [CMD, php, -r, "exit(@fsockopen('127.0.0.1',80)?0:1);"]
+      interval: 15s
+      timeout: 5s
+      retries: 8
+networks:
+  front:
+    ipam:
+      config:
+        - subnet: 10.255.80.0/24
+  database:
+    internal: true
+    ipam:
+      config:
+        - subnet: 10.255.81.0/24
+volumes:
+  db:
+  wordpress:
