@@ -18,7 +18,9 @@ services:
       timeout: 5s
       retries: 12
   web:
-    image: wordpress:6.8.9-php8.2-apache
+    # Verified Docker Hub image digest. The live WordPress core in the persistent volume
+    # must be patched independently; recreating the container does not update that core.
+    image: wordpress:php8.2-apache@sha256:fedb8ec2d935248b8bc71b3a108240cce7946f104526fbab9d734fb8378dae87
     restart: unless-stopped
     environment:
       WORDPRESS_DB_HOST: db:3306
