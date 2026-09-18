@@ -18,7 +18,7 @@ services:
       timeout: 5s
       retries: 12
   web:
-    image: wordpress:6.8.2-php8.2-apache
+    image: wordpress:6.8.9-php8.2-apache
     restart: unless-stopped
     environment:
       WORDPRESS_DB_HOST: db:3306
