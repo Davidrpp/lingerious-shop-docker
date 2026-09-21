@@ -744,3 +744,16 @@ body.woocommerce main {
     font-size: 1rem !important;
   }
 }
+
+.lg-purchase-help {
+  align-items: center;
+  color: var(--lg-cocoa);
+  display: flex;
+  font-size: .78rem;
+  gap: .6rem;
+  margin: -1rem 0 2rem;
+}
+.lg-purchase-help a {
+  border-bottom: 1px solid var(--lg-border);
+  color: var(--lg-cocoa);
+}

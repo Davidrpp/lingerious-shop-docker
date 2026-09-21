@@ -27,3 +27,16 @@ flush_rewrite_rules(false);
 echo "Activated theme: " . wp_get_theme()->get('Name') . PHP_EOL;
 echo "Privacy page: " . get_option('wp_page_for_privacy_policy') . PHP_EOL;
 echo "Terms page: " . get_option('woocommerce_terms_page_id') . PHP_EOL;
+
+$product = get_post(2890);
+if ($product && $product->post_type === 'product') {
+    $content = str_ireplace('asjustable', 'adjustable', $product->post_content);
+    $excerpt = str_ireplace('asjustable', 'adjustable', $product->post_excerpt);
+    if ($content !== $product->post_content || $excerpt !== $product->post_excerpt) {
+        wp_update_post([
+            'ID' => 2890,
+            'post_content' => $content,
+            'post_excerpt' => $excerpt,
+        ]);
+    }
+}

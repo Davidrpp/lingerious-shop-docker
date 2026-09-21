@@ -125,7 +125,12 @@ add_filter('woocommerce_output_related_products_args', function (array $args): a
 });
 
 add_filter('loop_shop_per_page', static fn (): int => 16, 20);
-add_filter('woocommerce_product_add_to_cart_text', static fn (): string => __('Add to bag', 'lingerious-editorial'));
+add_filter('woocommerce_product_add_to_cart_text', function (string $text, $product): string {
+    if ($product && $product->is_type('simple') && $product->is_purchasable() && $product->is_in_stock()) {
+        return __('Add to bag', 'lingerious-editorial');
+    }
+    return $text;
+}, 20, 2);
 add_filter('woocommerce_product_single_add_to_cart_text', static fn (): string => __('Add to bag', 'lingerious-editorial'));
 
 add_filter('woocommerce_page_title', function (string $title): string {
@@ -193,3 +198,11 @@ add_action('template_redirect', function (): void {
         exit;
     }
 }, 0);
+
+add_action('woocommerce_after_add_to_cart_form', function (): void {
+    echo '<div class="lg-purchase-help">';
+    echo '<a href="' . esc_url(lingerious_clean_url('size-guide')) . '">Size guide</a>';
+    echo '<span aria-hidden="true">·</span>';
+    echo '<a href="' . esc_url(lingerious_clean_url('returns')) . '">Returns policy</a>';
+    echo '</div>';
+});
