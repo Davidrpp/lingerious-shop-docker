@@ -41,3 +41,20 @@ docker exec lingerious-preview-web-1 php /tmp/restore-twentytwentyfour.php
 ## Notes
 
 Checkout, payment gateways, and outbound email are intentionally still controlled by the existing preview safety layer. This branch does not add secrets, credentials, `.env` files, or third-party protected assets.
+
+
+## Storefront hardening in v0.2.0
+
+- Replaces placeholder/internal copy with customer-facing English copy.
+- Uses the real WooCommerce categories: Bras, Bottoms, Sets & Two Pieces, and Bodysuits.
+- Adds clean routes for `/shop/`, `/cart/`, `/checkout/`, `/my-account/`, legal/help pages, and product categories.
+- Redirects the main legacy nested URLs to their clean equivalents.
+- Removes duplicate/legacy navigation from the new theme by using a single versioned header and footer.
+- Adds responsive mobile navigation, product-grid polish, variable-product controls, account/cart/checkout styling, and legal-page typography.
+- Adds safe fallback alt text for product images when WordPress has no alt value.
+- Configures the existing privacy and terms pages when the theme activation helper is run.
+- Corrects the legacy `All prodcuts` product-category typo during activation.
+
+## Remaining launch gates
+
+Photography is intentionally not addressed in this branch. The current public runtime still contains the migration `preview-safety.php` MU-plugin, which disables checkout/payment gateways/outbound mail and sends `noindex, nofollow`. Do not remove that safety layer until checkout, payment and mail delivery have been tested end-to-end.
