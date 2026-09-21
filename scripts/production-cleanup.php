@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 /**
  * One-off production cleanup for Lingerious after activating the editorial theme.
  */
@@ -9,6 +9,7 @@ update_option('blogdescription', 'Premium lingerie and intimates');
 update_option('blog_public', '1');
 update_option('wp_page_for_privacy_policy', 2698);
 update_option('woocommerce_terms_page_id', 2702);
+update_option('woocommerce_default_customer_address', 'base');
 
 $term = get_term_by('slug', 'all-prodcuts', 'product_cat');
 if ($term && ! is_wp_error($term)) {
@@ -65,3 +66,4 @@ if (has_action('litespeed_purge_all')) {
 }
 
 echo "Production cleanup completed" . PHP_EOL;
+
