@@ -64,6 +64,8 @@ add_action('init', function (): void {
         add_rewrite_rule('^all-products/?$', 'index.php?page_id=' . $shop_id, 'top');
     }
 
+    add_rewrite_rule('^shop/page/([0-9]+)/?$', 'index.php?post_type=product&paged=$matches[1]', 'top');
+
     foreach (['bras', 'bottoms', 'bodysuits', 'sets-two-pieces'] as $slug) {
         add_rewrite_rule('^' . $slug . '/?$', 'index.php?product_cat=' . $slug, 'top');
     }
@@ -206,3 +208,101 @@ add_action('woocommerce_after_add_to_cart_form', function (): void {
     echo '<a href="' . esc_url(lingerious_clean_url('returns')) . '">Returns policy</a>';
     echo '</div>';
 });
+
+/* Canonical URLs must match the clean public navigation. */
+add_filter('wpseo_canonical', function (string $canonical): string {
+    if (function_exists('is_shop') && is_shop()) {
+        return is_paged() ? home_url('/shop/page/' . max(1, (int) get_query_var('paged')) . '/') : lingerious_clean_url('shop');
+    }
+    if (function_exists('is_product_category') && is_product_category()) {
+        $term = get_queried_object();
+        if ($term && in_array($term->slug, ['bras', 'bottoms', 'bodysuits', 'sets-two-pieces'], true)) {
+            return lingerious_clean_url($term->slug);
+        }
+    }
+    if (is_page()) {
+        $map = lingerious_clean_page_map();
+        $id = (int) get_queried_object_id();
+        if (isset($map[$id])) {
+            return lingerious_clean_url($map[$id]);
+        }
+    }
+    return $canonical;
+}, 30);
+
+add_action('template_redirect', function (): void {
+    if (!function_exists('is_shop') || !is_shop() || is_paged() || is_admin() || wp_doing_ajax()) {
+        return;
+    }
+    $path = wp_parse_url($_SERVER['REQUEST_URI'] ?? '', PHP_URL_PATH) ?: '/';
+    if (untrailingslashit($path) !== '/shop') {
+        wp_safe_redirect(lingerious_clean_url('shop'), 301);
+        exit;
+    }
+}, 2);
+
+/** Keep product filters server-side, queryable, and restricted to real WooCommerce terms. */
+function lingerious_filter_term(string $taxonomy, string $parameter): string {
+    $raw = isset($_GET[$parameter]) && is_string($_GET[$parameter]) ? sanitize_title(wp_unslash($_GET[$parameter])) : '';
+    if ($raw === '' || !taxonomy_exists($taxonomy)) {
+        return '';
+    }
+    $term = get_term_by('slug', $raw, $taxonomy);
+    return $term && !is_wp_error($term) ? $term->slug : '';
+}
+
+add_action('woocommerce_product_query', function ($query): void {
+    if (is_admin() && !wp_doing_ajax()) {
+        return;
+    }
+    $tax_query = (array) $query->get('tax_query');
+    foreach (['size' => 'pa_size', 'color' => 'pa_color'] as $parameter => $taxonomy) {
+        $term = lingerious_filter_term($taxonomy, $parameter);
+        if ($term !== '') {
+            $tax_query[] = ['taxonomy' => $taxonomy, 'field' => 'slug', 'terms' => [$term]];
+        }
+    }
+    $query->set('tax_query', $tax_query);
+}, 20);
+
+add_action('woocommerce_before_shop_loop', function (): void {
+    if (!(is_shop() || is_product_category())) {
+        return;
+    }
+    echo '<div class="lg-catalog-toolbar"><nav class="lg-category-nav" aria-label="Product categories">';
+    foreach (['shop' => 'All', 'bras' => 'Bras', 'bottoms' => 'Bottoms', 'sets-two-pieces' => 'Sets', 'bodysuits' => 'Bodysuits'] as $slug => $name) {
+        $active = $slug === 'shop' ? is_shop() : is_product_category($slug);
+        echo '<a' . ($active ? ' aria-current="page"' : '') . ' href="' . esc_url(lingerious_clean_url($slug)) . '">' . esc_html($name) . '</a>';
+    }
+    echo '</nav><form class="lg-catalog-filters" method="get">';
+    foreach (['size' => ['taxonomy' => 'pa_size', 'title' => 'Size'], 'color' => ['taxonomy' => 'pa_color', 'title' => 'Color']] as $parameter => $config) {
+        $chosen = lingerious_filter_term($config['taxonomy'], $parameter);
+        echo '<label for="lg-filter-' . esc_attr($parameter) . '">' . esc_html($config['title']) . '</label>';
+        echo '<select id="lg-filter-' . esc_attr($parameter) . '" name="' . esc_attr($parameter) . '"><option value="">All</option>';
+        $terms = get_terms(['taxonomy' => $config['taxonomy'], 'hide_empty' => true]);
+        if (!is_wp_error($terms)) {
+            if ($parameter === 'size') {
+                $order = array_flip(['xs','s','m','l','xl','xxl','xxxl','4xl','5xl','6xl']);
+                usort($terms, static fn ($a, $b) => ($order[$a->slug] ?? 99) <=> ($order[$b->slug] ?? 99));
+            }
+            foreach ($terms as $term) {
+                echo '<option value="' . esc_attr($term->slug) . '"' . selected($chosen, $term->slug, false) . '>' . esc_html($term->name) . '</option>';
+            }
+        }
+        echo '</select>';
+    }
+    if (isset($_GET['orderby']) && is_string($_GET['orderby'])) {
+        echo '<input type="hidden" name="orderby" value="' . esc_attr(sanitize_key(wp_unslash($_GET['orderby']))) . '">';
+    }
+    echo '<button type="submit">Filter</button>';
+    if (lingerious_filter_term('pa_size', 'size') || lingerious_filter_term('pa_color', 'color')) {
+        echo '<a class="lg-reset-filters" href="' . esc_url(remove_query_arg(['size', 'color', 'paged', 'product-page'])) . '">Clear</a>';
+    }
+    echo '</form></div>';
+}, 12);
+
+add_action('woocommerce_no_products_found', function (): void {
+    if (lingerious_filter_term('pa_size', 'size') || lingerious_filter_term('pa_color', 'color')) {
+        echo '<p class="lg-empty-filter-reset"><a href="' . esc_url(remove_query_arg(['size','color','paged','product-page'])) . '">Clear size and color filters</a></p>';
+    }
+}, 5);
