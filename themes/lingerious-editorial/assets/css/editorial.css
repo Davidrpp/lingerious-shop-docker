@@ -126,3 +126,49 @@ body .wc-block-product .wp-block-button__link span{font:inherit!important}
 .woocommerce div.product div.images .flex-control-thumbs li img{display:block;width:100%!important;height:90px!important;aspect-ratio:4/5;object-fit:cover;opacity:.75}
 .woocommerce div.product div.images .flex-control-thumbs li img.flex-active,.woocommerce div.product div.images .flex-control-thumbs li img:hover{opacity:1}
 @media(min-width:768px){.woocommerce div.product div.images .flex-control-thumbs li{flex-basis:80px!important;width:80px!important;min-width:80px}}
+
+/* PDP 0.7: tactile selectors, clean purchase hierarchy, native WooCommerce fallback. */
+.single-product .lg-store-main .woocommerce-breadcrumb{margin-bottom:19px}
+.single-product .lg-store-main div.product div.summary{padding:0 0 18px}
+.single-product .lg-store-main div.product .product_title{font:400 clamp(31px,3.2vw,45px)/1.08 var(--lg-serif)!important;letter-spacing:-.045em;max-width:18ch;margin:0 0 14px!important}
+.single-product .lg-store-main div.product p.price{font:500 20px/1.25 var(--lg-sans);color:var(--lg-ink);margin-bottom:23px!important}
+.single-product .lg-store-main div.product .summary form.cart{display:block;border-top:1px solid var(--lg-rule);border-bottom:0;margin:20px 0 4px!important;padding:21px 0 0}
+.single-product .lg-store-main div.product form.cart table.variations,.single-product .lg-store-main div.product form.cart .variations tbody{display:block;width:100%;border:0;margin:0;padding:0}
+.single-product .lg-store-main div.product form.cart .variations tr{display:block;width:100%;border:0;margin:0 0 23px}
+.single-product .lg-store-main div.product form.cart .variations th.label{display:flex;align-items:center;flex-wrap:wrap;gap:8px;width:100%;border:0;padding:0 0 11px;text-align:left}
+.single-product .lg-store-main div.product form.cart .variations th.label label{font:650 12px/1.4 var(--lg-sans)!important;letter-spacing:.07em!important;text-transform:uppercase}
+.single-product .lg-store-main div.product form.cart .variations td.value{display:block;width:100%;padding:0;border:0}
+.lg-variant-current{font:400 12px/1.4 var(--lg-sans);color:var(--lg-muted);letter-spacing:0;text-transform:none}
+.lg-variant-guide{margin-left:auto;font:500 12px/1.4 var(--lg-sans)!important;letter-spacing:0!important;text-transform:none!important;text-decoration:underline!important;text-underline-offset:4px}
+.single-product .lg-store-main form.variations_form select.lg-variant-native{position:absolute!important;width:1px!important;height:1px!important;min-width:0!important;min-height:0!important;max-width:1px!important;padding:0!important;margin:0!important;border:0!important;opacity:0!important;clip-path:inset(50%)!important;pointer-events:none!important;overflow:hidden!important}
+.lg-variant-picker{display:flex;flex-wrap:wrap;align-items:center;gap:9px;min-width:0}
+.single-product .lg-store-main .lg-variant-option{position:relative;display:inline-flex;align-items:center;justify-content:center;flex:0 0 auto;min-width:49px;min-height:45px;padding:8px 11px!important;border:1px solid var(--lg-rule)!important;border-radius:0!important;background:transparent!important;color:var(--lg-ink)!important;font:600 13px/1 var(--lg-sans)!important;letter-spacing:0!important;cursor:pointer;transition:border-color .12s,background .12s}
+.single-product .lg-store-main .lg-variant-option:hover:not(:disabled){border-color:var(--lg-ink)!important}
+.single-product .lg-store-main .lg-variant-option.is-selected{border-color:var(--lg-ink)!important;background:#eee8e2!important;box-shadow:inset 0 0 0 1px var(--lg-ink)!important}
+.single-product .lg-store-main .lg-variant-option:disabled{opacity:.38;cursor:not-allowed;text-decoration:line-through}
+.single-product .lg-store-main .lg-variant-picker--color{gap:13px;padding:4px 0 2px}
+.single-product .lg-store-main .lg-variant-picker--color .lg-variant-option{width:42px;min-width:42px;min-height:42px;height:42px;padding:4px!important;border:1px solid var(--lg-rule)!important;border-radius:50%!important;background:transparent!important}
+.single-product .lg-store-main .lg-variant-picker--color .lg-variant-option.is-selected{border-color:var(--lg-ink)!important;box-shadow:0 0 0 2px var(--lg-paper),0 0 0 3px var(--lg-ink)!important}
+.lg-variant-swatch{display:block;width:30px;height:30px;min-width:30px;border-radius:50%;border:1px solid #0002}
+.single-product .lg-store-main .lg-variant-picker--color .lg-variant-option--text{font-size:9px!important;width:auto;max-width:130px;border-radius:0!important;overflow:hidden}
+.single-product .lg-store-main .lg-variant-picker--color .lg-variant-option--text.is-selected{border-radius:0!important}
+.single-product .lg-store-main form.cart .reset_variations{display:inline-block;margin:12px 0 0;font:500 11px/1.4 var(--lg-sans);text-decoration:underline;text-underline-offset:4px}
+.single-product .lg-store-main form.cart .woocommerce-variation.single_variation{font-size:12px;color:var(--lg-muted);padding:0 0 12px}
+.single-product .lg-store-main form.cart .woocommerce-variation-add-to-cart{display:flex!important;align-items:stretch;flex-wrap:nowrap;gap:10px;margin:0}
+.single-product .lg-store-main div.product form.cart .quantity{flex:0 0 66px;margin:0!important}
+.single-product .lg-store-main div.product form.cart .quantity .qty{height:52px!important;width:66px!important;max-width:66px!important;background:transparent}
+.single-product .lg-store-main div.product form.cart .single_add_to_cart_button{flex:1 1 auto;width:auto!important;min-width:0;min-height:52px!important;border:1px solid var(--lg-ink)!important;background:var(--lg-ink)!important;color:#fff!important;text-transform:uppercase;letter-spacing:.1em!important;font-size:12px!important}
+.single-product .lg-store-main .lg-purchase-help{border-bottom:1px solid var(--lg-rule);padding:0 0 18px;margin:7px 0 18px;gap:10px;font-size:12px}
+.single-product .lg-store-main form[data-lg-enhanced] + .lg-purchase-help a:first-child,.single-product .lg-store-main form[data-lg-enhanced] + .lg-purchase-help span{display:none}
+.single-product .lg-store-main div.product .summary .product_meta{border:0;margin:14px 0 0;padding:0;color:var(--lg-muted);font-size:11px}
+.single-product .lg-store-main div.product .woocommerce-tabs{padding-top:28px;margin-top:35px;border-top:1px solid var(--lg-rule)}
+.single-product .lg-store-main div.product .woocommerce-tabs ul.tabs{border-bottom:1px solid var(--lg-rule)!important;gap:26px!important;margin-bottom:23px}
+.single-product .lg-store-main div.product .woocommerce-tabs ul.tabs li{padding-bottom:12px!important;font:600 12px/1.35 var(--lg-sans)}
+.single-product .lg-store-main div.product .woocommerce-tabs ul.tabs li.active{border-bottom:2px solid var(--lg-ink)!important}
+.single-product .lg-store-main div.product .woocommerce-tabs .panel{color:var(--lg-muted);font:400 14px/1.7 var(--lg-sans);max-width:68ch}
+.single-product .lg-store-main div.product .related{margin-top:45px}.single-product .lg-store-main div.product .related>h2{font:400 clamp(26px,3vw,38px)/1.15 var(--lg-serif);margin-bottom:22px}
+@media(min-width:600px){.single-product .lg-store-main div.product div.summary{padding:18px 0 12px}.single-product .lg-store-main div.product form.cart .single_add_to_cart_button{max-width:420px}}
+@media(max-width:599px){.single-product .lg-store-main{padding-top:20px!important}.single-product .lg-store-main div.product .summary .product_title{font-size:clamp(30px,8vw,38px)!important;max-width:100%}.single-product .lg-store-main .lg-variant-picker--size{gap:8px}.single-product .lg-store-main .lg-variant-option{min-width:46px;min-height:44px}.single-product .lg-store-main div.product form.cart .single_add_to_cart_button{max-width:none!important}.single-product .lg-store-main div.product .woocommerce-tabs ul.tabs{gap:15px!important}}
+/* Some legacy variations have no exact photograph: state that limitation at selection. */
+.single-product .lg-store-main .lg-variant-photo-note{font:400 12px/1.5 var(--lg-sans);color:var(--lg-muted);margin:9px 0 0;max-width:43ch}
+.single-product .lg-store-main .lg-variant-photo-note[hidden]{display:none}

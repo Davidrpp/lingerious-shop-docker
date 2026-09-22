@@ -316,3 +316,35 @@ add_filter('wp_get_attachment_image_attributes', function (array $attributes, $a
     }
     return $attributes;
 }, 30, 2);
+
+/** Product page: preserve WooCommerce variation logic, enhance native inputs only with JS. */
+add_action('wp_enqueue_scripts', function (): void {
+    if (!function_exists('is_product') || !is_product()) {
+        return;
+    }
+    wp_enqueue_script(
+        'lingerious-product-options',
+        get_stylesheet_directory_uri() . '/assets/js/product-options.js',
+        ['jquery', 'wc-add-to-cart-variation'],
+        wp_get_theme()->get('Version'),
+        true
+    );
+}, 30);
+
+add_action('wp', function (): void {
+    if (function_exists('is_product') && is_product()) {
+        remove_action('woocommerce_single_product_summary', 'woocommerce_template_single_excerpt', 20);
+        remove_action('woocommerce_single_product_summary', 'woocommerce_template_single_meta', 40);
+    }
+});
+
+require_once __DIR__ . '/inc/media.php';
+
+/** Leave informative product specifications, but do not show empty review tabs. */
+add_filter('woocommerce_product_tabs', function (array $tabs): array {
+    $product = function_exists('wc_get_product') ? wc_get_product(get_the_ID()) : false;
+    if ($product && (int) $product->get_review_count() === 0) unset($tabs['reviews']);
+    if (isset($tabs['description'])) $tabs['description']['title'] = 'Product details';
+    if (isset($tabs['additional_information'])) $tabs['additional_information']['title'] = 'Specifications';
+    return $tabs;
+}, 40);
