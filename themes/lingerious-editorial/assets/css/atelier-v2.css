@@ -156,3 +156,10 @@ body.lingerious-editorial .lg-home-assistance nav span{color:var(--atelier-wine)
  body.lingerious-editorial .woocommerce ul.products,body.lingerious-editorial .lg-home-products .woocommerce ul.products{gap:30px 12px!important}
 }
 @media(prefers-reduced-motion:reduce){body.lingerious-editorial .lg-category-editorial__image img,body.lingerious-editorial .woocommerce ul.products li.product a img{transition:none}}
+/* Critical layout correction: keep the hero media inside its own grid row. */
+@media(min-width:900px){
+ body.lingerious-editorial .lg-atelier-hero{height:clamp(540px,52vw,740px)!important;min-height:0!important;max-height:none!important;grid-template-rows:minmax(0,1fr)!important;overflow:hidden!important}
+ body.lingerious-editorial .lg-atelier-hero__image{height:100%!important;min-height:0!important;min-width:0;position:relative;overflow:hidden}
+ body.lingerious-editorial .lg-atelier-hero__image img{position:absolute;inset:0;width:100%!important;height:100%!important;object-fit:cover}
+ body.lingerious-editorial.single-product .lg-store-main div.product div.summary{position:static!important;top:auto!important}
+}

@@ -356,3 +356,14 @@ add_filter('woocommerce_product_tabs', function (array $tabs): array {
 add_action('wp_enqueue_scripts', function (): void {
     wp_enqueue_style('lingerious-atelier-v2', get_stylesheet_directory_uri() . '/assets/css/atelier-v2.css', ['lingerious-editorial-style'], wp_get_theme()->get('Version'));
 }, 40);
+
+/** Product layout has its own final design layer; WooCommerce form/variation logic remains native. */
+add_action('wp_enqueue_scripts', function (): void {
+    if (!function_exists('is_product') || !is_product()) return;
+    wp_enqueue_style(
+        'lingerious-pdp-v3',
+        get_stylesheet_directory_uri() . '/assets/css/product-v3.css',
+        ['lingerious-atelier-v2'],
+        wp_get_theme()->get('Version')
+    );
+}, 50);

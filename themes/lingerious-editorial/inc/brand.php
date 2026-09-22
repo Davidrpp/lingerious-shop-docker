@@ -22,7 +22,7 @@ add_action('woocommerce_after_single_product_summary', function (): void {
     $product = wc_get_product(get_the_ID());
     if (!$product) return;
     echo '<section class="lg-product-information" aria-label="Product information">';
-    echo '<div class="lg-product-information__intro"><p class="lg-eyebrow">The details</p><h2>About this piece</h2></div>';
+    echo '<div class="lg-product-information__intro"><p class="lg-eyebrow">Product information</p><h2>Details &amp; sizing</h2></div>';
     $description = trim($product->get_description());
     if ($description !== '') {
         echo '<details class="lg-product-disclosure"><summary>Description</summary><div class="lg-product-disclosure__body">';
