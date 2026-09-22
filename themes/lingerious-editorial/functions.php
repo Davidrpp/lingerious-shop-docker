@@ -306,3 +306,13 @@ add_action('woocommerce_no_products_found', function (): void {
         echo '<p class="lg-empty-filter-reset"><a href="' . esc_url(remove_query_arg(['size','color','paged','product-page'])) . '">Clear size and color filters</a></p>';
     }
 }, 5);
+
+/** Prioritize the featured image on product pages; keep secondary images lazy. */
+add_filter('wp_get_attachment_image_attributes', function (array $attributes, $attachment): array {
+    if (function_exists('is_product') && is_product()
+        && (int) $attachment->ID === (int) get_post_thumbnail_id(get_queried_object_id())) {
+        $attributes['loading'] = 'eager';
+        $attributes['fetchpriority'] = 'high';
+    }
+    return $attributes;
+}, 30, 2);

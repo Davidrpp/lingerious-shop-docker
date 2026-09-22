@@ -113,3 +113,16 @@ body .wc-block-product .wp-block-button__link span{font:inherit!important}
 .lg-store-main .lg-catalog-filters button{border:1px solid var(--lg-ink)!important;border-radius:0!important;color:#fff!important;background:var(--lg-ink)!important;min-height:40px;padding:7px 14px!important;cursor:pointer;font:600 11px/1.2 var(--lg-sans)!important;letter-spacing:.04em}
 .lg-reset-filters,.lg-empty-filter-reset a{font-size:12px;color:var(--lg-ink);text-decoration:underline;text-underline-offset:4px}
 @media(max-width:599px){.lg-catalog-toolbar{align-items:flex-start;gap:15px;padding:15px 0}.lg-category-nav{width:100%;gap:12px 16px}.lg-category-nav a{font-size:11px}.lg-catalog-filters{width:100%;gap:8px}.lg-store-main .lg-catalog-filters select{min-width:74px;max-width:110px}}
+
+/* Mobile: show the bag independently of the expanded menu. */
+.lg-nav{grid-template-columns:minmax(0,1fr) auto auto;gap:14px}
+.lg-mobile-bag{display:inline-flex;align-items:center;justify-self:end;min-height:44px;color:var(--lg-ink)!important;text-decoration:none!important;font:600 12px/1 var(--lg-sans);letter-spacing:.055em}
+.lg-mobile-menu{justify-self:end}
+@media(min-width:1024px){.lg-nav{grid-template-columns:minmax(200px,1fr) auto minmax(130px,1fr)}.lg-mobile-bag{display:none}}
+@media(max-width:359px){.lg-nav{gap:8px}.lg-mobile-bag{font-size:11px}.lg-mobile-menu summary{padding-left:4px}}
+/* One scrollable thumbnail rail: product details stay within reach on phones. */
+.woocommerce div.product div.images .flex-control-thumbs{display:flex!important;flex-wrap:nowrap!important;gap:8px;overflow-x:auto;scroll-snap-type:x proximity;overscroll-behavior-inline:contain;scrollbar-width:thin;max-width:100%;padding:0 0 8px!important}
+.woocommerce div.product div.images .flex-control-thumbs li{float:none!important;flex:0 0 72px!important;width:72px!important;min-width:72px;scroll-snap-align:start}
+.woocommerce div.product div.images .flex-control-thumbs li img{display:block;width:100%!important;height:90px!important;aspect-ratio:4/5;object-fit:cover;opacity:.75}
+.woocommerce div.product div.images .flex-control-thumbs li img.flex-active,.woocommerce div.product div.images .flex-control-thumbs li img:hover{opacity:1}
+@media(min-width:768px){.woocommerce div.product div.images .flex-control-thumbs li{flex-basis:80px!important;width:80px!important;min-width:80px}}
