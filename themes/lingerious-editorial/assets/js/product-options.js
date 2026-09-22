@@ -51,6 +51,7 @@
       picker.setAttribute('aria-label', `${label} options`);
       const selected = document.createElement('span');
       selected.className = 'lg-variant-current';
+      selected.setAttribute('aria-live', 'polite');
       heading.append(selected);
       if (isSize && !heading.querySelector('.lg-variant-guide')) {
         const guide = document.createElement('a');
@@ -68,6 +69,8 @@
         button.setAttribute('aria-label', `${label}: ${option.textContent.trim()}`);
         button.setAttribute('aria-pressed', 'false');
         button.title = option.textContent.trim();
+        button.addEventListener('pointerdown', () => button.classList.add('is-pointer-focus'));
+        button.addEventListener('blur', () => button.classList.remove('is-pointer-focus'));
         if (isColor) {
           const tone = colors[option.value.toLowerCase()] || colors[option.value.toLowerCase().replace(/-set$/, '')];
           if (tone) {
@@ -147,7 +150,7 @@
       for (const control of controls) {
         const {select, buttons, selected, isSize} = control;
         const current = select.options[select.selectedIndex];
-        selected.textContent = current?.value ? (isSize ? conciseSize(current.textContent) : current.textContent.trim()) : '';
+        selected.textContent = current?.value ? (isSize ? conciseSize(current.textContent) : current.textContent.trim().replace(/\s+Set$/i, '')) : '';
         for (const button of buttons) {
           const native = [...select.options].find(option => option.value === button.dataset.value);
           const inStock = !available || available.some(candidate => matchesVariation(candidate, select, button.dataset.value));

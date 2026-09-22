@@ -370,6 +370,16 @@ add_action('wp_enqueue_scripts', function (): void {
         wp_get_theme()->get('Version')
     );
 }, 50);
+/** Final isolated fashion selector layer, independent from legacy product grids. */
+add_action('wp_enqueue_scripts', function (): void {
+    if (!function_exists('is_product') || !is_product()) return;
+    wp_enqueue_style(
+        'lingerious-selectors-v4',
+        get_stylesheet_directory_uri() . '/assets/css/selectors-v4.css',
+        ['lingerious-pdp-v3'],
+        wp_get_theme()->get('Version')
+    );
+}, 60);
 
 /** Imported products may use alpha sizes in the cup-size attribute; label by product. */
 add_filter('woocommerce_attribute_label', function (string $label, string $name, $product): string {
@@ -380,3 +390,12 @@ add_filter('woocommerce_attribute_label', function (string $label, string $name,
     if ((int) $id === 3997) return 'Bra size';
     return $label;
 }, 20, 3);
+
+/** Avoid exposing large supplier stock counts as merchandising copy on PDPs. */
+add_filter('woocommerce_get_availability_text', function (string $text, $product): string {
+    if (!function_exists('is_product') || !is_product() || !($product instanceof WC_Product)) return $text;
+    $quantity = $product->get_stock_quantity();
+    if ($product->is_in_stock() && !$product->is_on_backorder(1)
+        && is_numeric($quantity) && (int) $quantity > 9) return 'In stock';
+    return $text;
+}, 20, 2);
