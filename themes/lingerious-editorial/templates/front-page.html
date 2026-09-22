@@ -1,46 +1,38 @@
 <!-- wp:template-part {"slug":"header","area":"header","tagName":"header"} /-->
-
 <!-- wp:html -->
-<main class="lg-home">
-  <section class="lg-atelier-hero">
-    <a class="lg-atelier-hero__image" href="/sets-two-pieces/" aria-label="Shop sets">
-      <img src="/wp-content/uploads/2025/01/lingerie-sets-romantic-sexy-embroidery-floral-blue-05-768x1024.jpg" alt="Blue embroidered lingerie set" />
+<main class="lg-home lg-home--atelier">
+  <section class="lg-atelier-hero" aria-label="Explore Lingerious">
+    <a class="lg-atelier-hero__image" href="/sets-two-pieces/" aria-label="Explore lingerie sets">
+      <img src="/wp-content/uploads/2025/01/lingerie-sets-romantic-sexy-embroidery-floral-blue-05-768x1024.jpg" alt="Blue embroidered bra and matching thong" fetchpriority="high" />
     </a>
     <div class="lg-atelier-hero__copy">
-      <p class="lg-label">Lingerious</p>
-      <h1>Independent intimates.</h1>
-      <p>Lace, mesh and cut-out silhouettes.</p>
-      <div class="lg-quiet-actions">
-        <a href="/shop/">Shop all</a>
-        <a href="/sets-two-pieces/">Sets</a>
-      </div>
+      <p class="lg-label">Lingerious / the edit</p>
+      <h1>Lingerie, up close.</h1>
+      <p>Bras, bottoms, bodysuits and sets.</p>
+      <div class="lg-quiet-actions"><a href="/shop/">Shop the collection</a><a href="/sets-two-pieces/">Explore sets</a></div>
     </div>
   </section>
-
-  <section class="lg-category-line" aria-label="Shop by category">
-    <a href="/bras/">Bras</a>
-    <a href="/bottoms/">Bottoms</a>
-    <a href="/sets-two-pieces/">Sets</a>
-    <a href="/bodysuits/">Bodysuits</a>
-  </section>
-  <section class="lg-home-products">
-    <div class="lg-home-products__head">
-      <p class="lg-label">New in</p>
-      <a href="/shop/?orderby=date">View all</a>
+  <section class="lg-category-editorial" aria-labelledby="lg-category-title">
+    <div class="lg-editorial-heading"><p class="lg-label">01 / Shop by piece</p><h2 id="lg-category-title">The collection</h2></div>
+    <div class="lg-category-editorial__grid">
+      <a class="lg-category-editorial__card" href="/bras/"><span class="lg-category-editorial__image"><img loading="lazy" src="/wp-content/uploads/2024/11/Hf65debd43d53474fbe97d0545ca45b175-768x768.avif" alt="Lace bra with fine straps" /></span><span class="lg-category-editorial__name">Bras <span aria-hidden="true">↗</span></span></a>
+      <a class="lg-category-editorial__card" href="/bottoms/"><span class="lg-category-editorial__image"><img loading="lazy" src="/wp-content/uploads/2024/11/S357f1817eb034d749e39abb2c3264dbf8-768x768.jpg" alt="Sheer lace thong" /></span><span class="lg-category-editorial__name">Bottoms <span aria-hidden="true">↗</span></span></a>
+      <a class="lg-category-editorial__card" href="/sets-two-pieces/"><span class="lg-category-editorial__image"><img loading="lazy" src="/wp-content/uploads/2025/01/lingerie-sets-purple-sexy-body-04-768x768.avif" alt="Purple embroidered lingerie set" /></span><span class="lg-category-editorial__name">Sets <span aria-hidden="true">↗</span></span></a>
+      <a class="lg-category-editorial__card" href="/bodysuits/"><span class="lg-category-editorial__image"><img loading="lazy" src="/wp-content/uploads/2024/11/S09be180b9d9c4efc951ca286a667f78bv_1_11zon.jpg" alt="Black bodysuit with garter straps" /></span><span class="lg-category-editorial__name">Bodysuits <span aria-hidden="true">↗</span></span></a>
     </div>
+  </section>
+  <section class="lg-home-products" aria-label="Latest products">
+    <div class="lg-home-products__head"><div><p class="lg-label">02 / Just added</p><h2>New arrivals</h2></div><a href="/shop/?orderby=date">View all</a></div>
 <!-- /wp:html -->
-
 <!-- wp:shortcode -->
-[products limit="8" columns="4" orderby="date" order="DESC" visibility="visible"]
+[products limit="4" columns="4" orderby="date" order="DESC" visibility="visible"]
 <!-- /wp:shortcode -->
-
 <!-- wp:html -->
   </section>
-  <section class="lg-editorial-note">
-    <p>Unsure about sizing?</p>
-    <a href="/size-guide/">Size guide</a>
+  <section class="lg-home-assistance" aria-label="Shopping information">
+    <div><span>03 / Need a hand?</span><h2>Find your fit.</h2></div>
+    <nav aria-label="Shopping help"><a href="/size-guide/">Size guide <span aria-hidden="true">↗</span></a><a href="/returns/">Shipping &amp; returns <span aria-hidden="true">↗</span></a><a href="/contact/">Contact <span aria-hidden="true">↗</span></a></nav>
   </section>
 </main>
 <!-- /wp:html -->
-
 <!-- wp:template-part {"slug":"footer","area":"footer","tagName":"footer"} /-->

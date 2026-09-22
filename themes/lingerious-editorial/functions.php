@@ -128,6 +128,7 @@ add_filter('woocommerce_output_related_products_args', function (array $args): a
 
 add_filter('loop_shop_per_page', static fn (): int => 16, 20);
 add_filter('woocommerce_product_add_to_cart_text', function (string $text, $product): string {
+    if ($product && $product->is_type('variable')) return __('View piece', 'lingerious-editorial');
     if ($product && $product->is_type('simple') && $product->is_purchasable() && $product->is_in_stock()) {
         return __('Add to bag', 'lingerious-editorial');
     }
@@ -313,6 +314,7 @@ add_filter('wp_get_attachment_image_attributes', function (array $attributes, $a
         && (int) $attachment->ID === (int) get_post_thumbnail_id(get_queried_object_id())) {
         $attributes['loading'] = 'eager';
         $attributes['fetchpriority'] = 'high';
+        $attributes['sizes'] = '(max-width: 899px) calc(100vw - 32px), (max-width: 1600px) 48vw, 740px';
     }
     return $attributes;
 }, 30, 2);
@@ -339,6 +341,7 @@ add_action('wp', function (): void {
 });
 
 require_once __DIR__ . '/inc/media.php';
+require_once __DIR__ . '/inc/brand.php';
 
 /** Leave informative product specifications, but do not show empty review tabs. */
 add_filter('woocommerce_product_tabs', function (array $tabs): array {
@@ -347,4 +350,9 @@ add_filter('woocommerce_product_tabs', function (array $tabs): array {
     if (isset($tabs['description'])) $tabs['description']['title'] = 'Product details';
     if (isset($tabs['additional_information'])) $tabs['additional_information']['title'] = 'Specifications';
     return $tabs;
+}, 40);
+
+/** Load the consolidated boutique design system after the baseline WooCommerce layer. */
+add_action('wp_enqueue_scripts', function (): void {
+    wp_enqueue_style('lingerious-atelier-v2', get_stylesheet_directory_uri() . '/assets/css/atelier-v2.css', ['lingerious-editorial-style'], wp_get_theme()->get('Version'));
 }, 40);
