@@ -78,7 +78,7 @@ foreach($categories as $id=>[$name,$description,$title,$meta]){
  echo 'CATEGORY '.$id.' '.$name.PHP_EOL;
  if(!$apply)continue;
  $r=wp_update_term($id,'product_cat',['name'=>$name,'description'=>$description]);if(is_wp_error($r))throw new RuntimeException($r->get_error_message());
- if(class_exists('WPSEO_Taxonomy_Meta')){WPSEO_Taxonomy_Meta::set_value($id,'product_cat','title',$title);WPSEO_Taxonomy_Meta::set_value($id,'product_cat','desc',$meta);}
+ if(class_exists('WPSEO_Taxonomy_Meta')){WPSEO_Taxonomy_Meta::set_values($id,'product_cat',['wpseo_title'=>$title,'wpseo_desc'=>$meta]);}
 }
 foreach([1324,1326,2250,2252,2254,2266,2408,2406,10,18,2270,2756,2752,2749,2592] as $id){if(!get_post($id))continue;echo 'LEGACY_NOINDEX '.$id.PHP_EOL;if($apply)update_post_meta($id,'_yoast_wpseo_meta-robots-noindex','1');}
 if($apply){$terms=get_post(2702);$new=str_replace(['Información sobre Lingerious','Adress:','Adress:________________________________','[___________Insert location____________]'],['Information about Lingerious','Address:','Address:________________________________','[jurisdiction to be confirmed]'],$terms->post_content);if($new!==$terms->post_content)wp_update_post(['ID'=>2702,'post_content'=>$new]);update_post_meta(2702,'_yoast_wpseo_title','Terms & Conditions | Lingerious');update_post_meta(2702,'_yoast_wpseo_metadesc','Read the published terms for the Lingerious online store, including purchase conditions, prices, deliveries, returns and contact information.');}
