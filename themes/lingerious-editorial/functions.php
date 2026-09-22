@@ -37,6 +37,7 @@ function lingerious_clean_page_map(): array {
         (int) get_option('woocommerce_checkout_page_id') => 'checkout',
         (int) get_option('woocommerce_myaccount_page_id') => 'my-account',
         2698 => 'privacy-policy',
+        2405 => 'about',
         2702 => 'terms-and-conditions',
         2705 => 'returns',
         2701 => 'faq',
@@ -157,19 +158,19 @@ add_filter('wp_get_attachment_image_attributes', function (array $attr, $attachm
 }, 20, 2);
 add_filter('document_title_parts', function (array $parts): array {
     if (is_front_page()) {
-        $parts['title'] = 'Lingerious — Premium Lingerie & Intimates';
+        $parts['title'] = 'Lingerie for Content Creators & Webcam Models | Lingerious';
         unset($parts['tagline']);
     }
     return $parts;
 });
 
 add_filter('wpseo_title', function (string $title): string {
-    return is_front_page() ? 'Lingerious — Premium Lingerie & Intimates' : $title;
+    return is_front_page() ? 'Lingerie for Content Creators & Webcam Models | Lingerious' : $title;
 });
 
 add_filter('wpseo_metadesc', function (string $description): string {
     if (is_front_page()) {
-        return 'Discover Lingerious lingerie, bras, bottoms, bodysuits and matching sets in a refined, modern edit.';
+        return 'Shop lingerie for adult content creators and webcam models: sheer sets, lace bras, strappy bodysuits and bottoms from independent boutique Lingerious.';
     }
     return $description;
 });
@@ -191,6 +192,7 @@ add_action('template_redirect', function (): void {
         2252 => '/sets-two-pieces/',
         2254 => '/bodysuits/',
         2408 => '/contact/',
+        2406 => '/about/',
         2266 => '/contact/',
         10   => '/returns/',
     ];
@@ -342,6 +344,7 @@ add_action('wp', function (): void {
 
 require_once __DIR__ . '/inc/media.php';
 require_once __DIR__ . '/inc/brand.php';
+require_once __DIR__ . '/inc/seo.php';
 
 /** Leave informative product specifications, but do not show empty review tabs. */
 add_filter('woocommerce_product_tabs', function (array $tabs): array {
