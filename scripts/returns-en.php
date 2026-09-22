@@ -1,30 +1,23 @@
 <?php
-/** Faithful English version of the existing shipping/returns text. No new business claims. */
+/** Customer-facing terms. Verify operational details and company identity separately. */
 return <<<'HTML'
 <h1>Shipping &amp; Returns</h1>
-<p>Our shipping and returns information is set out below. Please read it before placing your order.</p>
-<h2>1. Shipping</h2>
-<h3>1.1 Shipping methods</h3>
-<p>Available shipping methods are shown at checkout. Shipping costs are calculated according to the delivery address and the weight of the products.</p>
-<h3>1.2 Delivery estimates</h3>
-<p>Delivery times depend on the destination and shipping method. The estimates stated in our existing policy are:</p>
-<ul><li>Domestic shipping: 3–7 business days.</li><li>International shipping: 7–14 business days.</li></ul>
-<p>These are estimates and may vary due to external circumstances, including weather, public holidays or logistics issues.</p>
-<h3>1.3 Order tracking</h3>
-<p>Once your order has been dispatched, we will send a tracking number by email so you can follow the shipment.</p>
-<h3>1.4 Shipping charges</h3>
-<p>Shipping costs are displayed before you confirm your order. They may depend on the total shipment weight and delivery address.</p>
-<h2>2. Returns</h2>
-<h3>2.1 Right of withdrawal</h3>
-<p>Under the Spanish-law withdrawal terms stated in our existing policy, you may withdraw from a purchase within 14 calendar days of receiving the product without giving a reason. To exercise this right, contact us through the <a href="/contact/">contact page</a> and return the item in its original condition and packaging.</p>
-<h3>2.2 Hygiene-related exclusions</h3>
-<p>For hygiene and health protection reasons, our existing policy excludes unsealed or non-original-condition intimate items from returns, unless there is a manufacturing defect. Any statutory rights that cannot legally be excluded remain unaffected.</p>
-<h3>2.3 How to request a return</h3>
-<ol><li>Contact customer support through our <a href="/contact/">contact page</a> to notify us of your decision.</li><li>Pack the item securely, preferably in its original packaging.</li><li>Send it to the return address provided by the support team. Return shipping is paid by the customer unless the product is defective or incorrect.</li></ol>
-<h3>2.4 Refunds</h3>
-<p>Once a return is received and checked, the existing policy states that the product amount is refunded within 14 calendar days through the original payment method. Original shipping charges are not refunded under that policy.</p>
-<h3>2.5 Defective or incorrect items</h3>
-<p>If an item is defective or differs from your order, you may request a return or replacement. Lingerious covers return shipping for defective or incorrect items under the existing policy.</p>
-<h2>3. Questions</h2>
-<p>For questions about shipping, withdrawal or returns, please use our <a href="/contact/">contact page</a>.</p>
+<p>Review the delivery information and return conditions before placing an order. For questions about an item or an existing order, <a href="/contact/">contact Lingerious</a>.</p>
+<h2>Delivery</h2>
+<p>Available delivery methods, destinations, charges and any delivery estimate are displayed at checkout. Review your order total and delivery details before confirming an order. If your destination or preferred delivery method is unavailable, contact us before paying.</p>
+<h2>Returns and exchanges: request within 15 days</h2>
+<p>You can request an eligible return or exchange within <strong>15 calendar days after receiving your order</strong>. Contact customer care with your order number, the item and your request. Exchanges are subject to the availability of the requested variant.</p>
+<p>This 15-day customer-service window does not restrict any statutory rights. If EU consumer law applies, most online purchases have a statutory withdrawal period of at least 14 calendar days after delivery, subject to legal exceptions. After you notify us of a valid withdrawal, you generally have a further 14 days to send the goods back.</p>
+<h2>Who pays return postage?</h2>
+<p><strong>Defective, incorrect or non-conforming products:</strong> return transport is free to you. Contact us before sending the item so we can provide the appropriate return instructions. Statutory remedies for faulty goods are not limited to 15 days.</p>
+<p><strong>Change of mind, fit or voluntary exchange:</strong> you pay the direct cost of return postage when that cost was disclosed before purchase and may lawfully be charged. You can choose a carrier and pay its actual postage charge. We do not currently advertise a fixed prepaid-label fee; ask customer care if you would prefer a label arranged by us and confirm any price before accepting it.</p>
+<h2>How to request a return</h2>
+<ol><li>Contact us via the <a href="/contact/">contact page</a> and include your order number.</li><li>Wait for return instructions and the correct return address; please do not send an unannounced parcel.</li><li>Package the item securely and retain proof of postage or collection.</li></ol>
+<h2>Intimate apparel and hygiene</h2>
+<p>For ordinary returns, please take reasonable care of the product. The legal hygiene exception applies only where a product genuinely qualifies as sealed goods unsuitable for return for health or hygiene reasons and its seal was broken after delivery. Lingerie is not automatically excluded from statutory withdrawal rights simply because it is intimate apparel. Your rights for defective or non-conforming items remain unaffected.</p>
+<h2>Refunds</h2>
+<p>For a valid withdrawal covered by EU law, we refund the payments that the law requires us to refund, including the standard outbound delivery charge where applicable. We process the refund using the original payment method within the applicable legal deadline, and may withhold reimbursement until we receive the goods back or receive evidence they were sent, where the law permits.</p>
+<p>Any optional prepaid-label fee would be quoted and agreed separately; we do not deduct an undisclosed flat return fee.</p>
+<h2>Questions or a faulty item?</h2>
+<p>Use the <a href="/contact/">contact page</a>. Include photographs of a defect if possible, but do not provide payment-card details by email.</p>
 HTML;
