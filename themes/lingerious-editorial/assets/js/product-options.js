@@ -12,6 +12,19 @@
   });
   const $ = window.jQuery;
   const display = text => text.replace(/-/g, ' ').replace(/\b\w/g, letter => letter.toUpperCase());
+  const sizeNames = ['XS','S','M','L','XL','XXL','XXXL','4XL','5XL','6XL'];
+  const conciseSize = text => {
+    const value = text.trim();
+    const match = value.match(/^(XS|S|M|L|XL|XXL|XXXL|[4-9]XL)\s*\(/i);
+    return match ? match[1].toUpperCase() : value;
+  };
+  const sizeRank = text => {
+    const value = conciseSize(text).toUpperCase().replace(/\s+/g,'');
+    const alpha = sizeNames.indexOf(value);
+    if (alpha >= 0) return alpha;
+    const bra = value.match(/^(\d{2,3})([A-H]{1,3})$/);
+    return bra ? 100 + Number(bra[1])*20 + bra[2].split('').reduce((n,c) => n*9+c.charCodeAt(0)-65,0) : 99999;
+  };
   function init(form) {
     if (form.dataset.lgEnhanced) return;
     const selects = [...form.querySelectorAll('table.variations select[name^="attribute_"]')];
@@ -20,10 +33,18 @@
     for (const select of selects) {
       const row = select.closest('tr');
       const heading = row?.querySelector('th.label');
-      const label = heading?.querySelector('label')?.textContent.trim() || display(select.name);
+      let label = heading?.querySelector('label')?.textContent.trim() || display(select.name);
       const isColor = /color/i.test(select.name);
       const isSize = /size/i.test(select.name);
       if (!row || (!isColor && !isSize)) continue;
+      const options = [...select.options].filter(item => item.value)
+        .sort((a,b) => isSize ? sizeRank(a.textContent)-sizeRank(b.textContent) : 0);
+      if (isSize) {
+        const braSizes = options.length > 0 && options.every(item => /^\d{2,3}[a-h]{1,3}$/i.test(item.textContent.trim()));
+        label = braSizes ? 'Bra size' : 'Size';
+        const nativeLabel = heading?.querySelector('label');
+        if (nativeLabel) nativeLabel.textContent = label;
+      }
       const picker = document.createElement('div');
       picker.className = `lg-variant-picker ${isColor ? 'lg-variant-picker--color' : 'lg-variant-picker--size'}`;
       picker.setAttribute('role', 'group');
@@ -39,7 +60,7 @@
         heading.append(guide);
       }
       const buttons = [];
-      for (const option of [...select.options].filter(item => item.value)) {
+      for (const option of options) {
         const button = document.createElement('button');
         button.type = 'button';
         button.className = 'lg-variant-option';
@@ -57,7 +78,7 @@
             button.append(swatch);
           } else button.classList.add('lg-variant-option--text');
         }
-        if (!button.firstChild) button.textContent = option.textContent.trim();
+        if (!button.firstChild) button.textContent = isSize ? conciseSize(option.textContent) : option.textContent.trim();
         button.addEventListener('click', () => {
           if (button.disabled) return;
           if ($) $(select).val(option.value).trigger('change');
@@ -69,10 +90,20 @@
       }
       if (!buttons.length) continue;
       select.insertAdjacentElement('afterend', picker);
+      if (isSize && options.some(item => conciseSize(item.textContent) !== item.textContent.trim())) {
+        const details = document.createElement('details');
+        details.className = 'lg-size-references';
+        const summary = document.createElement('summary');
+        summary.textContent = 'Supplier size references';
+        const explanation = document.createElement('p');
+        explanation.textContent = options.map(item => item.textContent.trim().replace(/or/ig, ' / ')).join(' · ') + '. These are supplier labels, not a verified fit chart.';
+        details.append(summary, explanation);
+        picker.after(details);
+      }
       select.classList.add('lg-variant-native');
       select.setAttribute('aria-hidden', 'true');
       select.tabIndex = -1;
-      controls.push({select, buttons, selected, label});
+      controls.push({select, buttons, selected, label, isSize});
     }
     if (!controls.length) return;
     form.dataset.lgEnhanced = 'true';
@@ -114,9 +145,9 @@
     }
     function refresh() {
       for (const control of controls) {
-        const {select, buttons, selected} = control;
+        const {select, buttons, selected, isSize} = control;
         const current = select.options[select.selectedIndex];
-        selected.textContent = current?.value ? current.textContent.trim() : '';
+        selected.textContent = current?.value ? (isSize ? conciseSize(current.textContent) : current.textContent.trim()) : '';
         for (const button of buttons) {
           const native = [...select.options].find(option => option.value === button.dataset.value);
           const inStock = !available || available.some(candidate => matchesVariation(candidate, select, button.dataset.value));

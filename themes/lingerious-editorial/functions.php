@@ -370,3 +370,13 @@ add_action('wp_enqueue_scripts', function (): void {
         wp_get_theme()->get('Version')
     );
 }, 50);
+
+/** Imported products may use alpha sizes in the cup-size attribute; label by product. */
+add_filter('woocommerce_attribute_label', function (string $label, string $name, $product): string {
+    if ($name !== 'pa_cup-size') return $label;
+    if (!($product instanceof WC_Product)) return 'Size';
+    $id = $product->is_type('variation') ? $product->get_parent_id() : $product->get_id();
+    if (in_array((int) $id, [4181, 4221], true)) return 'Size';
+    if ((int) $id === 3997) return 'Bra size';
+    return $label;
+}, 20, 3);
