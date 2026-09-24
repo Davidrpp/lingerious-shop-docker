@@ -1,0 +1,165 @@
+/* Lingerious Atelier: one boutique design language across PDP, catalogue and home. */
+:root{--atelier-ink:#211c1b;--atelier-paper:#fdfbf8;--atelier-soft:#f1ede8;--atelier-wine:#6d3444;--atelier-line:#ddd8d2;--atelier-space:clamp(16px,4.5vw,72px)}
+body.lingerious-editorial{background:var(--atelier-paper);color:var(--atelier-ink)}
+body.lingerious-editorial .lg-header{background:var(--atelier-paper);border-bottom-color:var(--atelier-line)}
+body.lingerious-editorial .lg-nav{max-width:1600px;min-height:76px;padding-inline:var(--atelier-space)}
+body.lingerious-editorial .lg-nav__links a{font-size:11px;letter-spacing:.065em;font-weight:500}
+body.lingerious-editorial .lg-nav a:hover{color:var(--atelier-wine)}
+body.lingerious-editorial .lg-store-main{max-width:1512px!important;padding:24px var(--atelier-space) 85px!important}
+body.lingerious-editorial .lg-store-main .woocommerce-breadcrumb{margin:7px 0 36px;font-size:11px;color:#827872;line-height:1.5}
+body.lingerious-editorial .lg-footer{background:#221e1d}
+body.lingerious-editorial .lg-store-main :focus-visible{outline:2px solid var(--atelier-wine);outline-offset:3px}
+/* 01 / The product: generous image, considered purchase panel, real product information. */
+body.lingerious-editorial.single-product .lg-store-main div.product{display:grid!important;grid-template-columns:minmax(0,1fr);gap:0;align-items:start;width:100%}
+body.lingerious-editorial.single-product .lg-store-main div.product::before,body.lingerious-editorial.single-product .lg-store-main div.product::after{display:none!important}
+body.lingerious-editorial.single-product .lg-store-main div.product div.images,body.lingerious-editorial.single-product .lg-store-main div.product div.summary{float:none!important;width:100%!important;max-width:100%;margin:0!important;min-width:0}
+body.lingerious-editorial.single-product .lg-store-main div.product .woocommerce-product-gallery{background:transparent;align-self:start}
+body.lingerious-editorial.single-product .lg-store-main div.product .woocommerce-product-gallery__wrapper{background:var(--atelier-soft)}
+body.lingerious-editorial.single-product .lg-store-main div.product .woocommerce-product-gallery__image img{width:100%;max-height:83vh;aspect-ratio:4/5;object-fit:contain;background:var(--atelier-soft)}
+body.lingerious-editorial.single-product .lg-store-main div.product .woocommerce-product-gallery .flex-control-thumbs{margin-top:10px!important;padding:0 0 8px!important}
+body.lingerious-editorial.single-product .lg-store-main div.product .woocommerce-product-gallery .flex-control-thumbs li{flex:0 0 64px!important;min-width:64px!important;width:64px!important}
+body.lingerious-editorial.single-product .lg-store-main div.product .woocommerce-product-gallery .flex-control-thumbs li img{height:79px!important;object-fit:cover}
+body.lingerious-editorial.single-product .lg-store-main div.product div.summary{padding:30px 0 0}
+body.lingerious-editorial .lg-pdp-eyebrow{display:inline-block;font:600 10px/1.2 Arial,Helvetica,sans-serif!important;letter-spacing:.16em;text-transform:uppercase;text-decoration:none!important;color:var(--atelier-wine)!important;margin:0 0 18px}
+body.lingerious-editorial.single-product .lg-store-main div.product .product_title{font:400 clamp(30px,4.2vw,55px)/1.055 Georgia,'Times New Roman',serif!important;letter-spacing:-.048em;margin:0 0 20px!important;color:var(--atelier-ink);max-width:19ch}
+body.lingerious-editorial.single-product .lg-store-main div.product p.price{font:400 19px/1.25 Arial,Helvetica,sans-serif!important;letter-spacing:-.015em;color:var(--atelier-ink)!important;margin:0 0 28px!important}
+body.lingerious-editorial.single-product .lg-store-main div.product .summary .stock{font-size:12px;color:var(--atelier-wine)}
+body.lingerious-editorial.single-product .lg-store-main div.product form.cart{display:block!important;margin:0!important;padding:25px 0 20px!important;border-top:1px solid var(--atelier-line);border-bottom:1px solid var(--atelier-line)}
+body.lingerious-editorial.single-product .lg-store-main div.product form.cart .variations{border:0!important;margin:0 0 15px!important}
+body.lingerious-editorial.single-product .lg-store-main div.product form.cart .variations tr{display:block;margin-bottom:23px}
+body.lingerious-editorial.single-product .lg-store-main div.product form.cart .variations th,body.lingerious-editorial.single-product .lg-store-main div.product form.cart .variations td{display:block;padding:0!important}
+body.lingerious-editorial.single-product .lg-store-main div.product form.cart .variations th{margin-bottom:12px}
+body.lingerious-editorial.single-product .lg-store-main div.product form.cart .variations label{font:600 11px/1.4 Arial,Helvetica,sans-serif;letter-spacing:.12em;text-transform:uppercase;color:var(--atelier-ink)}
+body.lingerious-editorial.single-product .lg-variant-picker--size{gap:8px!important}
+body.lingerious-editorial.single-product .lg-variant-picker--size button{width:52px!important;height:46px!important;min-width:52px!important;background:transparent!important;border:1px solid var(--atelier-line)!important;color:var(--atelier-ink)!important;font:500 12px/1 Arial,Helvetica,sans-serif!important;box-shadow:none!important}
+body.lingerious-editorial.single-product .lg-variant-picker--size button.is-selected{border:1px solid var(--atelier-ink)!important;box-shadow:inset 0 0 0 1px var(--atelier-ink)!important}
+body.lingerious-editorial.single-product .lg-variant-picker--size button:disabled{opacity:.35!important;text-decoration:line-through;cursor:not-allowed}
+body.lingerious-editorial.single-product .lg-variant-picker--color{gap:13px!important;margin-bottom:7px}
+body.lingerious-editorial.single-product .lg-variant-picker--color button{width:40px!important;height:40px!important;min-width:40px!important;border:1px solid var(--atelier-line)!important;box-shadow:none!important}
+body.lingerious-editorial.single-product .lg-variant-picker--color button.is-selected{outline:1px solid var(--atelier-ink)!important;outline-offset:3px}
+body.lingerious-editorial.single-product .lg-variant-current{font-size:12px!important;color:var(--atelier-wine)!important;letter-spacing:0!important;margin-left:10px}
+body.lingerious-editorial.single-product .lg-variant-guide{float:right;font:400 12px/1.5 Arial,Helvetica,sans-serif!important;letter-spacing:0!important;text-transform:none!important;text-decoration:underline!important;text-underline-offset:3px;color:var(--atelier-ink)}
+body.lingerious-editorial.single-product .lg-store-main div.product form.cart .woocommerce-variation-add-to-cart{display:grid!important;grid-template-columns:72px minmax(0,1fr);gap:10px;align-items:stretch}
+body.lingerious-editorial.single-product .lg-store-main div.product form.cart .quantity{margin:0!important;width:72px!important}
+body.lingerious-editorial.single-product .lg-store-main div.product form.cart .quantity .qty{width:72px!important;height:53px!important;background:transparent}
+body.lingerious-editorial.single-product .lg-store-main div.product form.cart .single_add_to_cart_button{width:100%!important;max-width:100%!important;min-height:53px!important;padding:13px 18px!important;background:var(--atelier-ink)!important;color:#fff!important;border:1px solid var(--atelier-ink)!important;font:600 12px/1.2 Arial,Helvetica,sans-serif!important;letter-spacing:.12em!important;text-transform:uppercase}
+body.lingerious-editorial.single-product .lg-store-main div.product form.cart .single_add_to_cart_button:not(.disabled):hover{background:var(--atelier-wine)!important;border-color:var(--atelier-wine)!important}
+body.lingerious-editorial.single-product .lg-store-main div.product form.cart .single_add_to_cart_button.disabled{opacity:.55!important;cursor:not-allowed}
+body.lingerious-editorial.single-product .lg-purchase-help{gap:10px;margin:17px 0 0!important;color:#665d58!important;font-size:12px}
+body.lingerious-editorial.single-product .lg-variant-photo-note{font-size:11px;line-height:1.5;color:#796e68}
+body.lingerious-editorial .lg-product-information{grid-column:1/-1;display:grid;grid-template-columns:1fr;gap:0;margin:66px 0 34px;border-top:1px solid var(--atelier-line);padding-top:30px}
+body.lingerious-editorial .lg-product-information__intro{padding:0 0 27px}
+body.lingerious-editorial .lg-eyebrow{font:600 10px/1.4 Arial,Helvetica,sans-serif;letter-spacing:.16em;text-transform:uppercase;color:var(--atelier-wine);margin:0 0 12px}
+body.lingerious-editorial .lg-product-information__intro h2{font:400 clamp(30px,3vw,48px)/1.08 Georgia,serif;letter-spacing:-.04em;margin:0}
+body.lingerious-editorial .lg-product-disclosure{border-top:1px solid var(--atelier-line);padding:0}
+body.lingerious-editorial .lg-product-disclosure:last-child{border-bottom:1px solid var(--atelier-line)}
+body.lingerious-editorial .lg-product-disclosure summary{list-style:none;position:relative;cursor:pointer;padding:18px 28px 18px 0;font:500 13px/1.4 Arial,Helvetica,sans-serif;color:var(--atelier-ink)}
+body.lingerious-editorial .lg-product-disclosure summary::-webkit-details-marker{display:none}
+body.lingerious-editorial .lg-product-disclosure summary::after{content:'+';position:absolute;right:2px;top:15px;font:400 22px/1 Georgia,serif}
+body.lingerious-editorial .lg-product-disclosure[open] summary::after{content:'−'}
+body.lingerious-editorial .lg-product-disclosure__body{max-width:690px;padding:0 12px 22px 0;color:#5e5652;font:400 13px/1.8 Arial,Helvetica,sans-serif}
+body.lingerious-editorial .lg-product-disclosure__body p{margin:0 0 10px}
+body.lingerious-editorial .lg-product-disclosure__body a{text-decoration:underline;text-underline-offset:3px;color:var(--atelier-ink)}
+body.lingerious-editorial .lg-specification-list{margin:0}
+body.lingerious-editorial .lg-specification-list div{display:grid;grid-template-columns:minmax(85px,130px) minmax(0,1fr);gap:15px;padding:8px 0}
+body.lingerious-editorial .lg-specification-list dt{font-weight:600;color:var(--atelier-ink)}
+body.lingerious-editorial .lg-specification-list dd{margin:0}
+body.lingerious-editorial.single-product .lg-store-main div.product .related{grid-column:1/-1;width:100%;border-top:1px solid var(--atelier-line);padding-top:38px;margin-top:25px}
+body.lingerious-editorial.single-product .lg-store-main div.product .related>h2{font:400 clamp(29px,3vw,46px)/1.15 Georgia,serif!important;letter-spacing:-.045em;margin:0 0 28px}
+body.lingerious-editorial.single-product .lg-store-main div.product .related ul.products{margin:0!important}
+/* 02 / The catalogue: photographs first, subtle merchandising and clear filtering. */
+body.lingerious-editorial .lg-store-main .woocommerce-products-header__title{font:400 clamp(39px,5vw,69px)/1 Georgia,serif!important;letter-spacing:-.052em;margin-bottom:29px!important}
+body.lingerious-editorial .lg-store-main .woocommerce-products-header{padding:10px 0 0;margin:0!important}
+body.lingerious-editorial .lg-catalog-toolbar{border-top:1px solid var(--atelier-line);border-bottom:1px solid var(--atelier-line);margin:0 0 24px;padding:19px 0;gap:15px}
+body.lingerious-editorial .lg-category-nav a{font-size:11px;letter-spacing:.045em;font-weight:500;color:#716762}
+body.lingerious-editorial .lg-category-nav a[aria-current=page]{color:var(--atelier-ink);border-bottom-color:var(--atelier-wine)}
+body.lingerious-editorial .lg-store-main .lg-catalog-filters select{background:transparent!important;border:0!important;border-bottom:1px solid var(--atelier-line)!important;border-radius:0!important;min-width:80px;height:39px!important;padding:6px 22px 6px 0!important;font:500 11px/1.4 Arial,Helvetica,sans-serif!important}
+body.lingerious-editorial .lg-store-main .lg-catalog-filters button{background:transparent!important;border:1px solid var(--atelier-ink)!important;color:var(--atelier-ink)!important;font-size:10px!important;letter-spacing:.08em!important;padding:10px 15px!important}
+body.lingerious-editorial .lg-store-main .woocommerce-result-count{color:#807670;font-size:11px;margin-top:4px}
+body.lingerious-editorial .lg-store-main .woocommerce-ordering select{min-width:170px;color:var(--atelier-ink);font-size:11px;border-bottom-color:var(--atelier-line)}
+body.lingerious-editorial .woocommerce ul.products,body.lingerious-editorial .lg-home-products .woocommerce ul.products{gap:39px 14px!important}
+body.lingerious-editorial .woocommerce ul.products li.product{padding:0!important;overflow:visible!important;background:transparent!important}
+body.lingerious-editorial .woocommerce ul.products li.product a img{aspect-ratio:3/4!important;object-fit:cover!important;background:var(--atelier-soft);margin:0 0 13px!important;transition:filter .25s ease}
+body.lingerious-editorial .woocommerce ul.products li.product a:hover img{filter:brightness(.965)}
+body.lingerious-editorial .woocommerce ul.products li.product .woocommerce-loop-product__title{font:400 13px/1.4 Arial,Helvetica,sans-serif!important;letter-spacing:0!important;min-height:2.8em!important;margin:0 0 5px!important;color:var(--atelier-ink)!important;-webkit-line-clamp:2}
+body.lingerious-editorial .woocommerce ul.products li.product .price{font:400 12px/1.5 Arial,Helvetica,sans-serif!important;color:#4b4542!important;margin:0 0 2px!important}
+body.lingerious-editorial .lg-product-colour-count{display:block;font:400 11px/1.4 Arial,Helvetica,sans-serif;color:#847a74;margin:1px 0 9px}
+body.lingerious-editorial .woocommerce ul.products li.product .button{font:500 10px/1.5 Arial,Helvetica,sans-serif!important;letter-spacing:.07em!important;border-bottom:1px solid var(--atelier-ink)!important;padding:0 0 3px!important;margin:8px 0 0!important;color:var(--atelier-ink)!important;text-transform:uppercase}
+body.lingerious-editorial .woocommerce ul.products li.product .button:hover{color:var(--atelier-wine)!important;border-bottom-color:var(--atelier-wine)!important}
+body.lingerious-editorial .lg-store-main .woocommerce .woocommerce-pagination{margin-top:46px!important}
+/* 03 / The home: photographic story, navigable collection, only four featured pieces. */
+body.lingerious-editorial .lg-home{background:var(--atelier-paper)}
+body.lingerious-editorial .lg-atelier-hero{background:var(--atelier-soft)}
+body.lingerious-editorial .lg-atelier-hero__image{aspect-ratio:4/4.6;background:#e7ded5;overflow:hidden}
+body.lingerious-editorial .lg-atelier-hero__image img{height:100%;width:100%;object-fit:cover;object-position:center 44%}
+body.lingerious-editorial .lg-atelier-hero__copy{padding:36px var(--atelier-space) 44px}
+body.lingerious-editorial .lg-atelier-hero .lg-label{color:var(--atelier-wine);letter-spacing:.17em}
+body.lingerious-editorial .lg-atelier-hero h1{max-width:10ch;font:400 clamp(45px,8vw,95px)/.96 Georgia,serif;letter-spacing:-.06em;color:var(--atelier-ink)}
+body.lingerious-editorial .lg-atelier-hero__copy>p:not(.lg-label){color:#645b55;font:400 14px/1.65 Arial,Helvetica,sans-serif;margin:24px 0}
+body.lingerious-editorial .lg-quiet-actions a{font-weight:500;font-size:11px;border-bottom:1px solid var(--atelier-ink)}
+body.lingerious-editorial .lg-category-editorial{max-width:1520px;margin:0 auto;padding:clamp(49px,7vw,105px) var(--atelier-space) 35px}
+body.lingerious-editorial .lg-editorial-heading{display:flex;justify-content:space-between;align-items:end;gap:18px;margin:0 0 30px}
+body.lingerious-editorial .lg-editorial-heading .lg-label{margin:0 0 4px;color:var(--atelier-wine)}
+body.lingerious-editorial .lg-editorial-heading h2{margin:0;font:400 clamp(32px,4vw,55px)/1.05 Georgia,serif;letter-spacing:-.05em}
+body.lingerious-editorial .lg-category-editorial__grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:25px 12px}
+body.lingerious-editorial .lg-category-editorial__card{display:block;min-width:0;text-decoration:none!important;color:var(--atelier-ink)!important}
+body.lingerious-editorial .lg-category-editorial__image{display:block;aspect-ratio:3/4;overflow:hidden;background:var(--atelier-soft)}
+body.lingerious-editorial .lg-category-editorial__image img{display:block;width:100%;height:100%;object-fit:cover;transition:transform .35s ease}
+body.lingerious-editorial .lg-category-editorial__card:hover img{transform:scale(1.025)}
+body.lingerious-editorial .lg-category-editorial__name{display:flex;justify-content:space-between;align-items:center;margin-top:12px;border-bottom:1px solid var(--atelier-line);padding:0 0 11px;font:400 clamp(19px,2vw,29px)/1.1 Georgia,serif;letter-spacing:-.04em}
+body.lingerious-editorial .lg-category-editorial__name span{font:400 17px/1 Arial,Helvetica,sans-serif;color:var(--atelier-wine)}
+body.lingerious-editorial .lg-home-products{max-width:1520px;padding:clamp(45px,6vw,90px) var(--atelier-space) 95px}
+body.lingerious-editorial .lg-home-products__head{align-items:end;margin-bottom:28px;gap:16px}
+body.lingerious-editorial .lg-home-products__head .lg-label{margin:0 0 10px;color:var(--atelier-wine)}
+body.lingerious-editorial .lg-home-products__head h2{margin:0;font:400 clamp(34px,4vw,53px)/1.05 Georgia,serif;letter-spacing:-.05em}
+body.lingerious-editorial .lg-home-products__head>a{font:500 11px/1.5 Arial,Helvetica,sans-serif;text-transform:uppercase;letter-spacing:.07em;white-space:nowrap}
+body.lingerious-editorial .lg-home-assistance{background:var(--atelier-soft);padding:clamp(34px,5vw,70px) var(--atelier-space);display:grid;grid-template-columns:1fr;gap:29px}
+body.lingerious-editorial .lg-home-assistance>div>span{font:600 10px/1.3 Arial,Helvetica,sans-serif;letter-spacing:.16em;text-transform:uppercase;color:var(--atelier-wine)}
+body.lingerious-editorial .lg-home-assistance h2{font:400 clamp(35px,5vw,66px)/1.04 Georgia,serif;letter-spacing:-.05em;margin:13px 0 0}
+body.lingerious-editorial .lg-home-assistance nav{display:grid;grid-template-columns:1fr;gap:0;align-content:center}
+body.lingerious-editorial .lg-home-assistance nav a{display:flex;justify-content:space-between;align-items:center;gap:12px;color:var(--atelier-ink);font:500 13px/1.3 Arial,Helvetica,sans-serif;text-decoration:none!important;border-bottom:1px solid #cec7be;padding:14px 0}
+body.lingerious-editorial .lg-home-assistance nav a:first-child{border-top:1px solid #cec7be}
+body.lingerious-editorial .lg-home-assistance nav span{color:var(--atelier-wine);font-size:18px}
+@media(min-width:600px){body.lingerious-editorial .lg-category-editorial__grid{gap:20px}body.lingerious-editorial .lg-home-assistance{grid-template-columns:1fr 1fr;align-items:center}body.lingerious-editorial .lg-home-products__head{margin-bottom:36px}}
+@media(min-width:900px){
+ body.lingerious-editorial.single-product .lg-store-main div.product{grid-template-columns:minmax(0,1.04fr) minmax(0,.83fr);column-gap:clamp(45px,6vw,108px)}
+ body.lingerious-editorial.single-product .lg-store-main div.product div.images{grid-column:1;grid-row:1}
+ body.lingerious-editorial.single-product .lg-store-main div.product div.summary{grid-column:2;grid-row:1;padding:8px 0 0;position:sticky;top:20px;align-self:start}
+ body.lingerious-editorial.single-product .lg-store-main div.product .woocommerce-product-gallery__image img{max-height:690px}
+ body.lingerious-editorial .lg-product-information{grid-template-columns:minmax(220px,.62fr) minmax(0,1.38fr);gap:0 55px;padding-top:44px;margin-top:90px}
+ body.lingerious-editorial .lg-product-information__intro{grid-column:1;grid-row:1/span 5;padding-right:22px}
+ body.lingerious-editorial .lg-product-disclosure{grid-column:2}
+ body.lingerious-editorial .lg-category-editorial__grid{grid-template-columns:1.12fr 1fr 1fr 1.12fr;gap:19px}
+ body.lingerious-editorial .lg-category-editorial__card:nth-child(2),body.lingerious-editorial .lg-category-editorial__card:nth-child(3){padding-top:38px}
+ body.lingerious-editorial .lg-atelier-hero{grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);min-height:660px;max-height:850px}
+ body.lingerious-editorial .lg-atelier-hero__image{min-height:660px;aspect-ratio:auto}
+ body.lingerious-editorial .lg-atelier-hero__copy{padding:clamp(35px,6vw,98px)}
+ body.lingerious-editorial .lg-home-assistance{grid-template-columns:1.1fr .9fr;padding-inline:max(var(--atelier-space),calc((100% - 1390px)/2))}
+}
+@media(min-width:1200px){body.lingerious-editorial .woocommerce ul.products,body.lingerious-editorial .lg-home-products .woocommerce ul.products{gap:45px 23px!important}body.lingerious-editorial .lg-store-main{padding-top:40px!important}}
+@media(max-width:899px){body.lingerious-editorial.single-product .lg-store-main div.product .summary{padding-top:28px!important}body.lingerious-editorial .lg-product-information{margin-top:48px}body.lingerious-editorial .lg-category-editorial{padding-top:58px}}
+@media(max-width:599px){
+ body.lingerious-editorial .lg-nav{min-height:64px}
+ body.lingerious-editorial .lg-store-main{padding:18px 16px 60px!important}
+ body.lingerious-editorial .lg-store-main .woocommerce-breadcrumb{margin-bottom:20px}
+ body.lingerious-editorial.single-product .lg-store-main div.product .woocommerce-product-gallery__image img{max-height:580px}
+ body.lingerious-editorial.single-product .lg-store-main div.product .product_title{font-size:clamp(28px,8vw,37px)!important;max-width:none}
+ body.lingerious-editorial.single-product .lg-store-main div.product .summary{padding-top:25px!important}
+ body.lingerious-editorial .lg-product-information__intro h2{font-size:33px}
+ body.lingerious-editorial .lg-category-editorial{padding:44px 16px 28px}
+ body.lingerious-editorial .lg-editorial-heading{display:block;margin-bottom:23px}
+ body.lingerious-editorial .lg-category-editorial__grid{gap:23px 12px}
+ body.lingerious-editorial .lg-category-editorial__name{font-size:22px}
+ body.lingerious-editorial .lg-home-products{padding:43px 16px 57px}
+ body.lingerious-editorial .lg-home-assistance{padding:40px 16px}
+ body.lingerious-editorial .lg-home-assistance h2{font-size:42px}
+ body.lingerious-editorial .woocommerce ul.products,body.lingerious-editorial .lg-home-products .woocommerce ul.products{gap:30px 12px!important}
+}
+@media(prefers-reduced-motion:reduce){body.lingerious-editorial .lg-category-editorial__image img,body.lingerious-editorial .woocommerce ul.products li.product a img{transition:none}}
+/* Critical layout correction: keep the hero media inside its own grid row. */
+@media(min-width:900px){
+ body.lingerious-editorial .lg-atelier-hero{height:clamp(540px,52vw,740px)!important;min-height:0!important;max-height:none!important;grid-template-rows:minmax(0,1fr)!important;overflow:hidden!important}
+ body.lingerious-editorial .lg-atelier-hero__image{height:100%!important;min-height:0!important;min-width:0;position:relative;overflow:hidden}
+ body.lingerious-editorial .lg-atelier-hero__image img{position:absolute;inset:0;width:100%!important;height:100%!important;object-fit:cover}
+ body.lingerious-editorial.single-product .lg-store-main div.product div.summary{position:static!important;top:auto!important}
+}
