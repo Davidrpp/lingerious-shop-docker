@@ -392,6 +392,11 @@ add_filter('woocommerce_attribute_label', function (string $label, string $name,
 }, 20, 3);
 
 /** Avoid exposing large supplier stock counts as merchandising copy on PDPs. */
+/** Privacy-friendly analytics served from the self-hosted Plausible instance. */
+add_action('wp_head', static function (): void {
+    echo '<script defer data-domain="lingerious.shop" src="https://analytics.drppconsulting.com/js/script.outbound-links.file-downloads.js"></script>' . "\n";
+}, 1);
+
 add_filter('woocommerce_get_availability_text', function (string $text, $product): string {
     if (!function_exists('is_product') || !is_product() || !($product instanceof WC_Product)) return $text;
     $quantity = $product->get_stock_quantity();
