@@ -394,8 +394,89 @@ add_filter('woocommerce_attribute_label', function (string $label, string $name,
 /** Avoid exposing large supplier stock counts as merchandising copy on PDPs. */
 /** Privacy-friendly analytics served from the self-hosted Plausible instance. */
 add_action('wp_head', static function (): void {
+    echo '<script>window.plausible=window.plausible||function(){(window.plausible.q=window.plausible.q||[]).push(arguments)}</script>' . "\n";
     echo '<script defer data-domain="lingerious.shop" src="https://analytics.drppconsulting.com/js/script.outbound-links.file-downloads.js"></script>' . "\n";
 }, 1);
+
+/** Commerce analytics. No customer PII is sent. */
+add_action('wp_footer', static function (): void {
+    if (is_admin()) return;
+
+    $context = [];
+    if (function_exists('is_product') && is_product()) {
+        $product = wc_get_product(get_queried_object_id());
+        if ($product instanceof WC_Product) {
+            $context = [
+                'event' => 'product_viewed',
+                'props' => [
+                    'product_id' => (string) $product->get_id(),
+                    'product_type' => $product->get_type(),
+                ],
+            ];
+        }
+    } elseif (function_exists('is_checkout') && is_checkout() && !is_order_received_page()) {
+        $context = ['event' => 'checkout_started', 'props' => ['path' => '/checkout/']];
+    } elseif (function_exists('is_cart') && is_cart()) {
+        $context = ['event' => 'cart_viewed', 'props' => ['path' => '/cart/']];
+    }
+    ?>
+    <script>
+    (() => {
+      const track = (name, props = {}, revenue) => {
+        if (!window.plausible) return;
+        const options = { props };
+        if (revenue) options.revenue = revenue;
+        window.plausible(name, options);
+      };
+      const context = <?php echo wp_json_encode($context); ?>;
+      if (context && context.event) track(context.event, context.props || {});
+
+      if (window.jQuery) {
+        jQuery(document.body).on('added_to_cart', (_event, _fragments, _cartHash, button) => {
+          const productId = button && button.data ? button.data('product_id') : undefined;
+          track('add_to_cart', { product_id: productId ? String(productId) : 'unknown', source: 'ajax' });
+        });
+      }
+
+      document.addEventListener('submit', (event) => {
+        const form = event.target;
+        if (!(form instanceof HTMLFormElement) || !form.matches('form.cart')) return;
+        const productId = form.querySelector('[name="add-to-cart"]')?.value || form.querySelector('[name="product_id"]')?.value || 'unknown';
+        track('add_to_cart', { product_id: String(productId), source: 'product_form' });
+      });
+
+      document.addEventListener('click', (event) => {
+        const link = event.target instanceof Element ? event.target.closest('a') : null;
+        if (!(link instanceof HTMLAnchorElement)) return;
+        const href = link.href || '';
+        if (href.startsWith('mailto:')) track('email_click', { path: location.pathname });
+        if (/wa\.me|whatsapp\.com/i.test(href)) track('whatsapp_click', { path: location.pathname });
+      });
+    })();
+    </script>
+    <?php
+}, 99);
+
+add_action('woocommerce_thankyou', static function ($order_id): void {
+    if (!$order_id) return;
+    $order = wc_get_order($order_id);
+    if (!($order instanceof WC_Order)) return;
+    $currency = (string) $order->get_currency();
+    $amount = (string) $order->get_total();
+    ?>
+    <script>
+    if (window.plausible) {
+      window.plausible('purchase', {
+        props: { currency: <?php echo wp_json_encode($currency); ?> },
+        revenue: {
+          currency: <?php echo wp_json_encode($currency); ?>,
+          amount: <?php echo wp_json_encode($amount); ?>
+        }
+      });
+    }
+    </script>
+    <?php
+}, 20);
 
 add_filter('woocommerce_get_availability_text', function (string $text, $product): string {
     if (!function_exists('is_product') || !is_product() || !($product instanceof WC_Product)) return $text;
