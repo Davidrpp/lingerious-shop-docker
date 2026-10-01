@@ -1,0 +1,6 @@
+<?php
+require '/var/www/html/wp-load.php';
+foreach([2405,2705] as $id){update_post_meta($id,'_wp_page_template','default');echo 'PAGE_TEMPLATE='.$id.' default'.PHP_EOL;}
+$categories=[27=>['Lace Bras & Corsets for Content Creators | Lingerious','Browse lace bras, fine-strap designs and strapless corsets. Compare available sizes and details for photo shoots, webcam looks and individual styling.'],28=>['Sheer Thongs & Lace Bottoms | Lingerious','Shop Brazilian briefs, lace-back thongs and embroidered lingerie bottoms. Explore sheer and strappy styles for mix-and-match creator outfits.'],29=>['Lingerie Sets & Garter Looks for Creators | Lingerious','Discover sheer lingerie sets, embroidered bra-and-thong looks and garter outfits. Check the included pieces, colours and sizes before ordering.'],30=>['Sheer & Cut-Out Bodysuits for Creators | Lingerious','Browse black mesh and cut-out bodysuits with strap and ring details. Statement lingerie for adult creator shoots and webcam outfit styling.']];
+foreach($categories as $id=>[$title,$desc]){WPSEO_Taxonomy_Meta::set_values($id,'product_cat',['wpseo_title'=>$title,'wpseo_desc'=>$desc]);$meta=WPSEO_Taxonomy_Meta::get_term_meta($id,'product_cat');echo 'TERM_META='.$id.' title='.($meta['wpseo_title']??'').' desc_len='.strlen($meta['wpseo_desc']??'').PHP_EOL;}
+wp_cache_flush();echo 'REPAIRED'.PHP_EOL;
