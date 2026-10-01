@@ -500,3 +500,18 @@ add_filter('wpseo_schema_organization', static function (array $data): array {
     }
     return $data;
 });
+
+
+// Lingerious SEO: add logo to WooCommerce offer seller schema.
+add_filter('woocommerce_structured_data_product_offer', static function (array $offer, $product): array {
+    $logoId = (int) get_theme_mod('custom_logo');
+    $logoUrl = $logoId ? wp_get_attachment_image_url($logoId, 'full') : get_site_icon_url();
+    if ($logoUrl && isset($offer['seller']) && is_array($offer['seller'])) {
+        $offer['seller']['logo'] = [
+            '@type' => 'ImageObject',
+            'url' => esc_url_raw($logoUrl),
+            'contentUrl' => esc_url_raw($logoUrl),
+        ];
+    }
+    return $offer;
+}, 20, 2);
