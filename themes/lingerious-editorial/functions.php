@@ -485,3 +485,18 @@ add_filter('woocommerce_get_availability_text', function (string $text, $product
         && is_numeric($quantity) && (int) $quantity > 9) return 'In stock';
     return $text;
 }, 20, 2);
+
+
+// Lingerious SEO: ensure Organization schema exposes a logo.
+add_filter('wpseo_schema_organization', static function (array $data): array {
+    $logoId = (int) get_theme_mod('custom_logo');
+    $logoUrl = $logoId ? wp_get_attachment_image_url($logoId, 'full') : get_site_icon_url();
+    if ($logoUrl) {
+        $data['logo'] = [
+            '@type' => 'ImageObject',
+            'url' => esc_url_raw($logoUrl),
+            'contentUrl' => esc_url_raw($logoUrl),
+        ];
+    }
+    return $data;
+});
