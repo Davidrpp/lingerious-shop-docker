@@ -38,6 +38,7 @@ services:
       - wordpress:/var/www/html
       - ./secrets:/run/secrets:ro
       - ./apache-preview.conf:/etc/apache2/conf-enabled/preview.conf:ro
+      - ./themes/lingerious-editorial:/var/www/html/wp-content/themes/lingerious-editorial:ro
     networks: [front, database]
     depends_on:
       db: {condition: service_healthy}
