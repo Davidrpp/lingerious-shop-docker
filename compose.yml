@@ -20,7 +20,7 @@ services:
   web:
     # Verified Docker Hub image digest. The live WordPress core in the persistent volume
     # must be patched independently; recreating the container does not update that core.
-    image: wordpress:php8.2-apache@sha256:fedb8ec2d935248b8bc71b3a108240cce7946f104526fbab9d734fb8378dae87
+    image: wordpress:php8.2-apache@sha256:7b713d74182855022c853fa70c1101cddf1a13d0f891233871294d8a5ce9aa44
     restart: unless-stopped
     environment:
       WORDPRESS_DB_HOST: db:3306
